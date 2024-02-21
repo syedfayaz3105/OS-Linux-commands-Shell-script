@@ -162,52 +162,57 @@ Linux is best in this World
 ^d
  ```
 egrep -w 'Hello|hello' newfile 
-## OUTPUT
+Hello world
+hello world
 
 
 
 egrep -w '(H|h)ello' newfile 
-## OUTPUT
+Hello world
+hello world
 
 
 
 egrep -w '(H|h)ell[a-z]' newfile 
-## OUTPUT
+Hello world
+hello world
 
 
 
 
 egrep '(^hello)' newfile 
-## OUTPUT
+hello world
 
 
 
 egrep '(world$)' newfile 
-## OUTPUT
+
+Hello world
+hello world
 
 
 
 egrep '(World$)' newfile 
-## OUTPUT
+Linux is best in this World
 
 
 egrep '((W|w)orld$)' newfile 
-## OUTPUT
+Hello world
+hello world
+Linux is best in this World
 
 
 
 egrep '[1-9]' newfile 
-## OUTPUT
+Linux is world number 1
 
 
 
 egrep 'Linux.*world' newfile 
-## OUTPUT
-
+Linux is world number 1
 
 egrep 'Linux.*World' newfile 
-## OUTPUT
-
+Linux is best in this World
 
 egrep l{2} newfile
 ## OUTPUT
@@ -215,7 +220,9 @@ egrep l{2} newfile
 
 
 egrep 's{1,2}' newfile
-## OUTPUT 
+Linux is world number 1
+Unix is predecessor
+Linux is best in this World 
 
 
 cat > file23
@@ -332,7 +339,12 @@ cat > file22
 1004 | Sit |  7000 | Dev
 ``` 
 uniq file22
-## OUTPUT
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1005 | Sam |  5000 | HR
+1004 | Sit |  7000 | Dev
+
 
 
 
