@@ -24,41 +24,68 @@ Testing the commands for the desired output.
 ### Create the following files file1, file2 as follows:
 cat > file1
 ```
-chanchal singhvi
-c.k. shukla
-s.n. dasgupta
-sumit chakrobarty
+Preethi
+Farhana
+Zafreen
 ^d
 ```
 cat > file2
 ```
-anil aggarwal
-barun sengupta
-c.k. shukla
-lalit chowdury
-s.n. dasgupta
+Gayathri
+Mahalakshmi
+Hemavathy
 ^d
 ```
 ### Display the content of the files
 cat < file1
 ## OUTPUT
-
-
+```
+Preethi
+Farhana
+Zafreen
+```
 
 cat < file2
 ## OUTPUT
+```
+Gayathri
+Mahalakshmi
+Hemavathy
+```
 
 
 # Comparing Files
 cmp file1 file2
 ## OUTPUT
+```
+file1 file2 differ: char 1, line 1
+```
  
 comm file1 file2
  ## OUTPUT
+ ```
+ Gayathri
+        Mahalakshmi
+        Hemavathy
+Preethi
+Farhana
+Zafreen
+```
 
  
 diff file1 file2
 ## OUTPUT
+```
+--- file1
++++ file2
+@@ -1,3 +1,3 @@
+-Preethi
+-Farhana
+-Zafreen
++Gayathri
++Mahalakshmi
++Hemavathy
+```
 
 
 #Filters
@@ -82,17 +109,29 @@ cat > file22
 
 cut -c1-3 file11
 ## OUTPUT
-
+```
+Hel
+Thi
+```
 
 
 
 cut -d "|" -f 1 file22
 ## OUTPUT
-
+```
+1001
+1002
+1003
+```
 
 
 cut -d "|" -f 2 file22
 ## OUTPUT
+```
+Ram
+tom
+Joe
+```
 
 
 cat < newfile 
@@ -107,39 +146,46 @@ hello world
  
 grep Hello newfile 
 ## OUTPUT
-
+```
+Hello world
+```
 
 
 grep hello newfile 
 ## OUTPUT
-
+```
+hello world
+```
 
 
 
 grep -v hello newfile 
 ## OUTPUT
+```
+Hello world
+```
 
 
 
 cat newfile | grep -i "hello"
 ## OUTPUT
-
+```
+Hello world
+```
 
 
 
 cat newfile | grep -i -c "hello"
 ## OUTPUT
-
-
-
-
-grep -R ubuntu /etc
-## OUTPUT
-
-
-
+```
+2
+```
 grep -w -n world newfile   
 ## OUTPUT
+```
+1: Hello world
+2: hello world
+```
 
 
 cat < newfile 
@@ -162,68 +208,99 @@ Linux is best in this World
 ^d
  ```
 egrep -w 'Hello|hello' newfile 
+## OUTPUT
+```
 Hello world
 hello world
+```
 
 
 
 egrep -w '(H|h)ello' newfile 
+## OUTPUT
+```
 Hello world
 hello world
+```
 
 
 
 egrep -w '(H|h)ell[a-z]' newfile 
+## OUTPUT
+```
 Hello world
 hello world
-
+```
 
 
 
 egrep '(^hello)' newfile 
+## OUTPUT
+```
 hello world
+```
 
 
 
 egrep '(world$)' newfile 
+## OUTPUT
+```
 
 Hello world
 hello world
+```
 
 
 
 egrep '(World$)' newfile 
+## OUTPUT
+```
 Linux is best in this World
-
+```
 
 egrep '((W|w)orld$)' newfile 
+## OUTPUT
+```
 Hello world
 hello world
 Linux is best in this World
-
+```
 
 
 egrep '[1-9]' newfile 
+## OUTPUT
+```
 Linux is world number 1
 
-
+```
 
 egrep 'Linux.*world' newfile 
+## OUTPUT
+```
 Linux is world number 1
+```
 
 egrep 'Linux.*World' newfile 
+## OUTPUT
+```
 Linux is best in this World
+```
 
 egrep l{2} newfile
 ## OUTPUT
 
-
+```
+Hello world
+hello world
+```
 
 egrep 's{1,2}' newfile
+## OUTPUT
+```
 Linux is world number 1
 Unix is predecessor
 Linux is best in this World 
-
+```
 
 cat > file23
 ```
@@ -242,78 +319,165 @@ cat > file23
 sed -n -e '3p' file23
 ## OUTPUT
 
-
+```
+1002 | tom |  5000 | Admin
+```
 
 sed -n -e '$p' file23
 ## OUTPUT
+```
+1001 | Ram | 10000 | HR
+```
 
 
-
-sed  -e 's/Ram/Sita/' file23
+sed  -e 's/Ram/Sit/' file23
 ## OUTPUT
+```
+1001 | Sit | 10000 | HR
+1001 | Sit | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1005 | Sam |  5000 | HR
+1004 | Sit |  7000 | Dev
+1003 | Joe |  7000 | Developer
+1001 | Sit | 10000 | HR
+```
 
 
 
 sed  -e '2s/Ram/Sita/' file23
 ## OUTPUT
+```
+1001 | Ram | 10000 | HR
+1001 | Sit | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1005 | Sam |  5000 | HR
+1004 | Sit |  7000 | Dev
+1003 | Joe |  7000 | Developer
+1001 | Ram | 10000 | HR
+```
 
 
 
 sed  '/tom/s/5000/6000/' file23
 ## OUTPUT
-
-
+```
+1001 | Ram | 10000 | HR
+1001 | Ram | 10000 | HR
+1002 | tom |  6000 | Admin
+1003 | Joe |  7000 | Developer
+1005 | Sam |  5000 | HR
+1004 | Sit |  7000 | Dev
+1003 | Joe |  7000 | Developer
+1001 | Ram | 10000 | HR
+```
 
 sed -n -e '1,5p' file23
 ## OUTPUT
+```
+1001 | Ram | 10000 | HR
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1005 | Sam |  5000 | HR
+```
 
 
 
 sed -n -e '2,/Joe/p' file23
 ## OUTPUT
 
-
+```
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+```
 
 
 sed -n -e '/tom/,/Joe/p' file23
 ## OUTPUT
-
+```
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+```
 
 
 seq 10 
 ## OUTPUT
-
+```
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
 
 
 seq 10 | sed -n '4,6p'
 ## OUTPUT
+```
+4
+5
+6
+```
 
 
 
 seq 10 | sed -n '2,~4p'
 ## OUTPUT
+```
+sed: no address after comma
+```
 
 
 
 seq 3 | sed '2a hello'
 ## OUTPUT
-
+```
+1
+2
+hello
+3
+```
 
 
 seq 2 | sed '2i hello'
 ## OUTPUT
-
+```
+1
+hello
+2
+```
 
 seq 10 | sed '2,9c hello'
 ## OUTPUT
-
+```
+1
+hello 10
+```
 
 sed -n '2,4{s/^/$/;p}' file23
 ## OUTPUT
-
+```
+$1001 | Ram | 10000 | HR
+$1002 | tom |  5000 | Admin
+$1003 | Joe |  7000 | Developer
+```
 
 
 sed -n '2,4{s/$/*/;p}' file23
+## OUTPUT
+```
+1001 | Ram | 10000 | HR*
+1002 | tom |  5000 | Admin*
+1003 | Joe |  7000 | Developer*
+```
 
 
 #Sorting File content
@@ -327,6 +491,13 @@ cat > file21
 ``` 
 sort file21
 ## OUTPUT
+```
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1004 | Sit |  7000 | Dev
+1005 | Sam |  5000 | HR
+```
 
 
 cat > file22
@@ -339,12 +510,14 @@ cat > file22
 1004 | Sit |  7000 | Dev
 ``` 
 uniq file22
+## OUTPUT
+```
 1001 | Ram | 10000 | HR
 1002 | tom |  5000 | Admin
 1003 | Joe |  7000 | Developer
 1005 | Sam |  5000 | HR
 1004 | Sit |  7000 | Dev
-
+```
 
 
 
@@ -352,6 +525,17 @@ uniq file22
 
 cat file23 | tr [:lower:] [:upper:]
  ## OUTPUT
+ ```
+1001 | RAM | 10000 | HR
+1001 | RAM | 10000 | HR
+1002 | TOM |  5000 | ADMIN
+1003 | JOE |  7000 | DEVELOPER
+1005 | SAM |  5000 | HR
+1004 | SIT |  7000 | DEV
+1003 | JOE |  7000 | DEVELOPER
+1001 | RAM | 10000 | HR
+```
+
 
 cat < urllist.txt
 ```
